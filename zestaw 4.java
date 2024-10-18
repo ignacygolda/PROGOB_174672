@@ -228,7 +228,7 @@ public class Main {
         System.out.print("srednia geometryczna: "+sredniaGeometryczna(tab)+"\n");
         System.out.print("srednia harmoniczna: "+sredniaHarmoniczna(tab)+"\n");
 
-        System.out.println("zadanie 4:");
+        System.out.println("zadanie 5:");
         System.out.print("liniowa: ");
         wyswietl(funkcjaLiniowa(tab,2,3));
         System.out.print("kwadratowa: ");
