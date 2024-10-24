@@ -273,6 +273,16 @@ public class Main {
         return tab;
     }
 
+    public static int[] generujZakres(int n, int minWartosc, int maxWartosc) {
+        int[] tab = new int[n];
+        Random rand = new Random();
+        int step = (maxWartosc - minWartosc)/n;
+        for(int i=0;i<n;i++) {
+            tab[i]=(rand.nextInt((maxWartosc-minWartosc)/step+1)+minWartosc/step)*step;
+        }
+        return tab;
+    }
+
     public static void main(String[] args) {
         System.out.println("zadanie 1:");
         int[] tab = generujTablice(10,10,50);
@@ -309,7 +319,7 @@ public class Main {
         System.out.print("signum: ");
         wyswietl(funkcjaSignum(tab));
 
-        System.out.println("zadanie 5:");
+        System.out.println("zadanie 6:");
         int[] tab2={1,5,7,4,8,-4,-7,8,11,0};
         System.out.print("najdluzszy ciag dodatnich: "+najdluzszyCiagDodatnich(tab2)+"\n");
         System.out.print("najdluzszy ciag ujemnych: "+najdluzszyCiagUjemnych(tab2)+"\n");
@@ -317,6 +327,10 @@ public class Main {
         wyswietl(odwrocTablice(tab2));
         System.out.print("odwroc tablice od do:\n");
         wyswietl(odwrocTablice(tab2,2,5));
+        
+        System.out.println("zadanie 7:");
+        int[] tab3 = generujZakres(5,1,15);
+        wyswietl(tab3);
 
     }
 }
