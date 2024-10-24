@@ -108,6 +108,22 @@ public class Main {
         return ile;
     }
 
+    public static int ileUnikalnych(int[] tab) {
+        int ile=0;
+        for(int i=0;i<tab.length;i++) {
+            boolean czyUni = true;
+            for(int j=i+1;j<tab.length;j++) {
+                if(tab[i]==tab[j]) {
+                    czyUni=false;
+                }
+            }
+            if(czyUni) {
+                ile++;
+            }
+        }
+        return ile;
+    }
+
     public static int sumaDodatnich(int[] tab) {
         int suma=0;
         for(int i=0;i<tab.length;i++) {
@@ -203,6 +219,60 @@ public class Main {
         return tab;
     }
 
+    public static int najdluzszyCiagDodatnich(int[] tab) {
+        int ciag=0;
+        int max_ciag=0;
+        for(int i=0;i<tab.length;i++) {
+            if(tab[i]>0) {
+                ciag++;
+            }
+            else {
+                if(ciag>max_ciag) {
+                    max_ciag=ciag;
+                }
+                ciag=0;
+            }
+        }
+        return max_ciag;
+    }
+
+    public static int najdluzszyCiagUjemnych(int[] tab) {
+        int ciag=0;
+        int max_ciag=0;
+        for(int i=0;i<tab.length;i++) {
+            if(tab[i]<0) {
+                ciag++;
+            }
+            else {
+                if(ciag>max_ciag) {
+                    max_ciag=ciag;
+                }
+                ciag=0;
+            }
+        }
+        return max_ciag;
+    }
+
+    public static int[] odwrocTablice(int[] tab) {
+        int[] out = new int[tab.length];
+        for(int i=0;i<tab.length;i++) {
+            out[i]=tab[tab.length-i-1];
+        }
+        return out;
+    }
+
+    public static int[] odwrocTablice(int[] tab,int indeksStart, int indeksStop) {
+        int[] temp = new int[indeksStop-indeksStart+1];
+        for(int i=0;i<=indeksStop-indeksStart;i++) {
+            temp[i]=tab[indeksStart+i];
+        }
+        temp=odwrocTablice(temp);
+        for(int i=indeksStart;i<=indeksStop;i++) {
+            tab[i]=temp[i-indeksStart];
+        }
+        return tab;
+    }
+
     public static void main(String[] args) {
         System.out.println("zadanie 1:");
         int[] tab = generujTablice(10,10,50);
@@ -219,6 +289,7 @@ public class Main {
         System.out.print("zerowe: "+ileZerowych(tab)+"\n");
         System.out.print("maksymalne: "+ileMaxymalnych(tab)+"\n");
         System.out.print("minimalne: "+ileMinimalnych(tab)+"\n");
+        System.out.print("unikalne: "+ileUnikalnych(tab)+"\n");
 
         System.out.println("zadanie 4:");
         System.out.print("suma dodatnich: "+sumaDodatnich(tab)+"\n");
@@ -237,5 +308,15 @@ public class Main {
         wyswietl(funkcjaWykladnicza(tab,2));
         System.out.print("signum: ");
         wyswietl(funkcjaSignum(tab));
+
+        System.out.println("zadanie 5:");
+        int[] tab2={1,5,7,4,8,-4,-7,8,11,0};
+        System.out.print("najdluzszy ciag dodatnich: "+najdluzszyCiagDodatnich(tab2)+"\n");
+        System.out.print("najdluzszy ciag ujemnych: "+najdluzszyCiagUjemnych(tab2)+"\n");
+        System.out.print("odwroc tablice:\n");
+        wyswietl(odwrocTablice(tab2));
+        System.out.print("odwroc tablice od do:\n");
+        wyswietl(odwrocTablice(tab2,2,5));
+
     }
 }
