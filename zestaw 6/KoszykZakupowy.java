@@ -1,5 +1,9 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.HashMap;
 
 public class KoszykZakupowy {
     List<Produkt> listaProduktow;
@@ -20,8 +24,20 @@ public class KoszykZakupowy {
 
     void wyswietlZawartoscKoszyka() {
         System.out.println("Zawartosc koszyka:");
+        HashMap<Produkt, Integer> ilosci = new HashMap<>();
         for (Produkt e : listaProduktow) {
+            if(ilosci.containsKey(e)) {
+                Integer temp = ilosci.get(e);
+                temp++;
+                ilosci.put(e,temp);
+            }
+            else {
+                ilosci.put(e,1);
+            }
+        }
+        for(Produkt e : ilosci.keySet()) {
             e.wyswietlInformacje();
+            System.out.println("ilosc: "+ilosci.get(e));
         }
     }
 
