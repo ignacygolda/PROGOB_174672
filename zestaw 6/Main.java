@@ -49,6 +49,30 @@ public class Main {
         wartosc = k1.obliczLacznyKosztZamowien();
         System.out.println(wartosc);
 
-        
+        System.out.println("Zadanie 5:");
+        Sklep s1 = new Sklep();
+        s1.dodajProdukt(a);
+        s1.dodajProdukt(b);
+        s1.dodajProdukt(c);
+        s1.wyswietlOferty();
+        Produkt x = s1.wyszukajProduktu("piekarnik");
+        x.wyswietlInformacje();
+        KoszykZakupowy k2 = new KoszykZakupowy();
+        s1.zakupy(a,2,k2);
+        k2.wyswietlZawartoscKoszyka();
+
+        System.out.println("Zadanie 6:");
+        KoszykZakupowy k5 = new KoszykZakupowy();
+        k5.dodajProdukt(a);
+        k5.dodajProdukt(a);
+        k5.dodajProdukt(a);
+        k5.dodajProdukt(b);
+        k5.dodajProdukt(c);
+        Zamowienie z5 = new Zamowienie(k5);
+        z5.wyswietlZamowienie();
+        z5.zwrocProdukt(a,2);
+        z5.wyswietlZamowienie();
+        z5.platnosc.zaplac();
+        z5.finalizujZamowienie();
     }
 }

@@ -13,7 +13,7 @@ public class Produkt {
         System.out.println("nazwa: "+this.nazwa);
         System.out.println("cena: "+this.cena);
         System.out.println("ilosc na magazynie: "+iloscNaMagazynie);
-        System.out.println();
+        //System.out.println();
     }
 
     void dodajDoMagazynu(int ilosc) {

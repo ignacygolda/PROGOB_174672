@@ -1,43 +1,39 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.HashMap;
 
 public class KoszykZakupowy {
+    HashMap<Produkt, Integer> listaProdoktowIlosc;
     List<Produkt> listaProduktow;
 
     public KoszykZakupowy() {
         this.listaProduktow = new ArrayList<>();
+        this.listaProdoktowIlosc = new HashMap<>();
     }
 
     void dodajProdukt(Produkt p) {
         if(p.iloscNaMagazynie>0) {
             this.listaProduktow.add(p);
             p.usunZMagazynu(1);
+            if(this.listaProdoktowIlosc.containsKey(p)) {
+                Integer temp = this.listaProdoktowIlosc.get(p);
+                temp++;
+                this.listaProdoktowIlosc.put(p,temp);
+            }
+            else {
+                this.listaProdoktowIlosc.put(p,1);
+            }
         }
         else {
             System.out.println("nie mozna dodac produktu");
+            System.out.println();
         }
     }
 
     void wyswietlZawartoscKoszyka() {
-        System.out.println("Zawartosc koszyka:");
-        HashMap<Produkt, Integer> ilosci = new HashMap<>();
-        for (Produkt e : listaProduktow) {
-            if(ilosci.containsKey(e)) {
-                Integer temp = ilosci.get(e);
-                temp++;
-                ilosci.put(e,temp);
-            }
-            else {
-                ilosci.put(e,1);
-            }
-        }
-        for(Produkt e : ilosci.keySet()) {
+        for(Produkt e : this.listaProdoktowIlosc.keySet()) {
             e.wyswietlInformacje();
-            System.out.println("ilosc: "+ilosci.get(e));
+            System.out.println("ilosc: "+this.listaProdoktowIlosc.get(e));
         }
     }
 
