@@ -1,30 +1,28 @@
 public class Produkt {
     String nazwa;
     double cena;
-    int iloscNaMagazynie;
 
-    public Produkt(String nazwa, double cena, int iloscNaMagazynie) {
+    public Produkt(String nazwa, double cena) {
         this.nazwa = nazwa;
         this.cena = cena;
-        this.iloscNaMagazynie = iloscNaMagazynie;
     }
 
     void wyswietlInformacje() {
         System.out.println("nazwa: "+this.nazwa);
         System.out.println("cena: "+this.cena);
-        System.out.println("ilosc na magazynie: "+iloscNaMagazynie);
-        //System.out.println();
     }
 
-    void dodajDoMagazynu(int ilosc) {
-        this.iloscNaMagazynie+=ilosc;
+    void dodajDoMagazynu(Magazyn m, int ilosc) {
+        m.dodajProdukt(this, ilosc);
     }
-    void usunZMagazynu(int ilosc) {
-        for(int i=0;i<ilosc;i++) {
-            this.iloscNaMagazynie--;
-            if(this.iloscNaMagazynie==0) {
-                break;
-            }
+    void usunZMagazynu(Magazyn m, int ilosc) {
+        m.usunProdukt(this, ilosc);
+    }
+
+    boolean equals(Produkt p) {
+        if(this.cena == p.cena && this.nazwa == p.nazwa) {
+            return true;
         }
+        return false;
     }
 }

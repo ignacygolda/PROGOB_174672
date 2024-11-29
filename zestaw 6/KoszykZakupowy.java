@@ -3,43 +3,45 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class KoszykZakupowy {
-    HashMap<Produkt, Integer> listaProdoktowIlosc;
-    List<Produkt> listaProduktow;
+    HashMap<Produkt, Integer> listaProduktow;
 
     public KoszykZakupowy() {
-        this.listaProduktow = new ArrayList<>();
-        this.listaProdoktowIlosc = new HashMap<>();
+        this.listaProduktow = new HashMap<>();
     }
 
-    void dodajProdukt(Produkt p) {
-        if(p.iloscNaMagazynie>0) {
-            this.listaProduktow.add(p);
-            p.usunZMagazynu(1);
-            if(this.listaProdoktowIlosc.containsKey(p)) {
-                Integer temp = this.listaProdoktowIlosc.get(p);
-                temp++;
-                this.listaProdoktowIlosc.put(p,temp);
+    void dodajProdukt(Magazyn m,Produkt p,int ilosc) {
+
+        if(this.listaProduktow.containsKey(p)) {
+            if(m.produkty.get(p)>ilosc) {
+                int temp = this.listaProduktow.get(p);
+                temp+=ilosc;
+                this.listaProduktow.put(p,temp);
             }
             else {
-                this.listaProdoktowIlosc.put(p,1);
+                this.listaProduktow.put(p,m.produkty.get(p));
             }
         }
         else {
-            System.out.println("nie mozna dodac produktu");
-            System.out.println();
+            if(m.produkty.get(p)>ilosc) {
+                this.listaProduktow.put(p,ilosc);
+            }
+            else {
+                this.listaProduktow.put(p,m.produkty.get(p));
+            }
         }
+        p.usunZMagazynu(m,ilosc);
     }
 
     void wyswietlZawartoscKoszyka() {
-        for(Produkt e : this.listaProdoktowIlosc.keySet()) {
+        for(Produkt e : this.listaProduktow.keySet()) {
             e.wyswietlInformacje();
-            System.out.println("ilosc: "+this.listaProdoktowIlosc.get(e));
+            System.out.println("ilosc: "+this.listaProduktow.get(e));
         }
     }
 
     double obliczCalkowitaWartosc() {
         double suma=0;
-        for (Produkt e : listaProduktow) {
+        for (Produkt e : listaProduktow.keySet()) {
             suma+=e.cena;
         }
         return suma;

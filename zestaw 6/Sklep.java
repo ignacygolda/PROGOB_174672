@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Sklep {
     List<Produkt> produkty;
@@ -25,10 +24,8 @@ public class Sklep {
         return null;
     }
 
-    void zakupy(Produkt p, int n, KoszykZakupowy k) {
-        for(int i=n;i>0;i--) {
-            k.dodajProdukt(p);
-        }
+    void zakupy(Magazyn m, Produkt p, int n, KoszykZakupowy k) {
+        k.dodajProdukt(m,p,n);
     }
 
 }

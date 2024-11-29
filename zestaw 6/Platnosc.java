@@ -9,4 +9,11 @@ public class Platnosc {
     void zaplac() {
         this.statusPlatnosci = "Opłacone";
     }
+
+    boolean equals(Platnosc p) {
+        if(this.kwota == p.kwota && this.statusPlatnosci == p.statusPlatnosci) {
+            return true;
+        }
+        return false;
+    }
 }

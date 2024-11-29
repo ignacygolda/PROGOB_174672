@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 public class Zamowienie {
     KoszykZakupowy koszykZakupowy;
     String statusZamowienia;
@@ -28,18 +26,18 @@ public class Zamowienie {
         }
     }
 
-    void zwrocProdukt(Produkt p, int n) {
-        if(this.koszykZakupowy.listaProdoktowIlosc.get(p)>n) {
-            p.dodajDoMagazynu(n);
-            int temp = this.koszykZakupowy.listaProdoktowIlosc.get(p)-n;
-            this.koszykZakupowy.listaProdoktowIlosc.put(p,temp);
+    void zwrocProdukt(Magazyn m,Produkt p, int n) {
+        if(this.koszykZakupowy.listaProduktow.get(p)>n) {
+            p.dodajDoMagazynu(m,n);
+            int temp = this.koszykZakupowy.listaProduktow.get(p)-n;
+            this.koszykZakupowy.listaProduktow.put(p,temp);
         }
         else {
-            p.dodajDoMagazynu(this.koszykZakupowy.listaProdoktowIlosc.get(p));
-            this.koszykZakupowy.listaProdoktowIlosc.remove(p);
+            p.dodajDoMagazynu(m,this.koszykZakupowy.listaProduktow.get(p));
+            this.koszykZakupowy.listaProduktow.remove(p);
         }
         this.platnosc.kwota=0;
-        for(Produkt e : koszykZakupowy.listaProduktow) {
+        for(Produkt e : koszykZakupowy.listaProduktow.keySet()) {
             this.platnosc.kwota+=e.cena;
         }
     }
