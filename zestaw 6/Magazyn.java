@@ -1,15 +1,21 @@
-import javax.xml.transform.Source;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Magazyn {
-    HashMap<Produkt,Integer> produkty;
+    private HashMap<Produkt,Integer> produkty;
 
     public Magazyn() {
         this.produkty = new HashMap<>();
-
     }
+
+    public HashMap<Produkt, Integer> getProdukty() {
+        return produkty;
+    }
+
+    public void setProdukty(HashMap<Produkt, Integer> produkty) {
+        if(produkty!=null) this.produkty = produkty;
+        else throw new IllegalArgumentException("Niepoprawne dane");
+    }
+
     void dodajProdukt(Produkt p, int ilosc) {
         if(this.produkty.containsKey(p)) {
             int temp = this.produkty.get(p);
@@ -32,10 +38,22 @@ public class Magazyn {
         }
     }
 
+    @Override
+    public String toString() {
+        String out = "";
+        out+="--------------------";
+        for(Produkt p : this.produkty.keySet()) {
+            out+=p.toString() + "\n";
+            out+="ilosc: "+this.produkty.get(p) + "\n";
+        }
+        out+="--------------------";
+        return out;
+    }
+
     void wyswietlAsortyment() {
         System.out.println("--------------------");
         for(Produkt p : this.produkty.keySet()) {
-            p.wyswietlInformacje();
+            System.out.println(p.toString());
             System.out.println("ilosc: "+this.produkty.get(p));
         }
         System.out.println("--------------------");

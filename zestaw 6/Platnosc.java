@@ -1,19 +1,47 @@
+import java.util.Objects;
+
 public class Platnosc {
-    double kwota;
-    String statusPlatnosci;
+    private double kwota;
+    private String statusPlatnosci;
 
     public Platnosc(double kwota, String statusPlatnosci) {
         this.kwota = kwota;
         this.statusPlatnosci = statusPlatnosci;
     }
-    void zaplac() {
-        this.statusPlatnosci = "Opłacone";
+
+    public double getKwota() {
+        return kwota;
     }
 
-    boolean equals(Platnosc p) {
-        if(this.kwota == p.kwota && this.statusPlatnosci == p.statusPlatnosci) {
-            return true;
-        }
+    public void setKwota(double kwota) {
+        if(kwota>=0) this.kwota = kwota;
+        else throw new IllegalArgumentException("Niepoprawne dane");
+    }
+
+    public String getStatusPlatnosci() {
+        return statusPlatnosci;
+    }
+
+    public void setStatusPlatnosci(String statusPlatnosci) {
+        if(statusPlatnosci!=null) this.statusPlatnosci = statusPlatnosci;
+        else throw new IllegalArgumentException("Niepoprawne dane");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Platnosc platnosc = (Platnosc) obj;
+        if(this.kwota == platnosc.getKwota() && this.statusPlatnosci.equals(platnosc.getStatusPlatnosci())) return true;
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(kwota, statusPlatnosci);
+    }
+
+    void zaplac() {
+        this.statusPlatnosci = "Opłacone";
     }
 }

@@ -1,7 +1,7 @@
 public class Zamowienie {
-    KoszykZakupowy koszykZakupowy;
-    String statusZamowienia;
-    Platnosc platnosc;
+    private KoszykZakupowy koszykZakupowy;
+    private String statusZamowienia;
+    private Platnosc platnosc;
 
     public Zamowienie(KoszykZakupowy koszykZakupowy) {
         this.koszykZakupowy = koszykZakupowy;
@@ -9,8 +9,45 @@ public class Zamowienie {
         this.platnosc = new Platnosc(koszykZakupowy.obliczCalkowitaWartosc(), "Nieopłacone");
     }
 
+    public KoszykZakupowy getKoszykZakupowy() {
+        return koszykZakupowy;
+    }
+
+    public void setKoszykZakupowy(KoszykZakupowy koszykZakupowy) {
+        if(koszykZakupowy!=null) this.koszykZakupowy = koszykZakupowy;
+        else throw new IllegalArgumentException("Niepoprawne dane");
+    }
+
+    public String getStatusZamowienia() {
+        return statusZamowienia;
+    }
+
+    public void setStatusZamowienia(String statusZamowienia) {
+        if(statusZamowienia!=null) this.statusZamowienia = statusZamowienia;
+        else throw new IllegalArgumentException("Niepoprawne dane");
+    }
+
+    public Platnosc getPlatnosc() {
+        return platnosc;
+    }
+
+    public void setPlatnosc(Platnosc platnosc) {
+        if(platnosc!=null) this.platnosc = platnosc;
+        else throw new IllegalArgumentException("Niepoprawne dane");
+    }
+
     void ustawStatusZamownienia(String status) {
         this.statusZamowienia = status;
+    }
+
+    @Override
+    public String toString() {
+        String out = "";
+        out+="---------------------";
+        out+="status zamownienia: "+this.statusZamowienia+"\n";
+        out+=this.koszykZakupowy.toString()+"\n";
+        out+="---------------------";
+        return out;
     }
 
     void wyswietlZamowienie() {
@@ -21,24 +58,25 @@ public class Zamowienie {
     }
 
     void finalizujZamowienie() {
-        if(this.platnosc.statusPlatnosci == "Opłacone") {
+        if(this.platnosc.getStatusPlatnosci() == "Opłacone") {
             this.statusZamowienia = "Gotowe do wysyłki";
         }
     }
 
     void zwrocProdukt(Magazyn m,Produkt p, int n) {
-        if(this.koszykZakupowy.listaProduktow.get(p)>n) {
+        if(this.koszykZakupowy.getListaProduktow().get(p)>n) {
             p.dodajDoMagazynu(m,n);
-            int temp = this.koszykZakupowy.listaProduktow.get(p)-n;
-            this.koszykZakupowy.listaProduktow.put(p,temp);
+            int temp = this.koszykZakupowy.getListaProduktow().get(p)-n;
+            this.koszykZakupowy.getListaProduktow().put(p,temp);
         }
         else {
-            p.dodajDoMagazynu(m,this.koszykZakupowy.listaProduktow.get(p));
-            this.koszykZakupowy.listaProduktow.remove(p);
+            p.dodajDoMagazynu(m,this.koszykZakupowy.getListaProduktow().get(p));
+            this.koszykZakupowy.getListaProduktow().remove(p);
         }
-        this.platnosc.kwota=0;
-        for(Produkt e : koszykZakupowy.listaProduktow.keySet()) {
-            this.platnosc.kwota+=e.cena;
+        double temp=0;
+        for(Produkt e : koszykZakupowy.getListaProduktow().keySet()) {
+            temp+=e.getCena();
         }
+        this.platnosc.setKwota(temp);
     }
 }
