@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class KoszykZakupowy {
+public class KoszykZakupowy implements KoszykZakupowy_interface {
     private HashMap<Produkt, Integer> listaProduktow;
 
     public KoszykZakupowy() {
@@ -16,7 +16,7 @@ public class KoszykZakupowy {
         else throw new IllegalArgumentException("Niepoprawne dane");
     }
 
-    void dodajProdukt(Magazyn m, Produkt p, int ilosc) {
+    public void dodajProdukt(Magazyn m, Produkt p, int ilosc) {
 
         if(this.listaProduktow.containsKey(p)) {
             if(m.getProdukty().get(p)>ilosc) {
@@ -49,14 +49,14 @@ public class KoszykZakupowy {
         return out;
     }
 
-    void wyswietlZawartoscKoszyka() {
+    public void wyswietlZawartoscKoszyka() {
         for(Produkt e : this.listaProduktow.keySet()) {
             System.out.println(e.toString());
             System.out.println("ilosc: "+this.listaProduktow.get(e));
         }
     }
 
-    double obliczCalkowitaWartosc() {
+    public double obliczCalkowitaWartosc() {
         double suma=0;
         for (Produkt e : listaProduktow.keySet()) {
             suma+=e.getCena();

@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Objects;
 
-public class Klient {
+public class Klient implements Klient_interface {
     private String imie;
     private String nazwisko;
     private Adres adres;
@@ -50,7 +50,7 @@ public class Klient {
         else throw new IllegalArgumentException("Niepoprawne dane");
     }
 
-    void dodajZamowienie(Zamowienie zamowienie) {
+    public void dodajZamowienie(Zamowienie zamowienie) {
         listaZamowien.add(zamowienie);
     }
 
@@ -77,13 +77,13 @@ public class Klient {
         return Objects.hash(imie, nazwisko, adres, listaZamowien);
     }
 
-    void wyswietlHistorieZamowien() {
+    public void wyswietlHistorieZamowien() {
         for(Zamowienie e : listaZamowien) {
             e.wyswietlZamowienie();
         }
     }
 
-    double obliczLacznyKosztZamowien() {
+    public double obliczLacznyKosztZamowien() {
         double suma=0;
         for(Zamowienie e : listaZamowien) {
             suma+=e.getKoszykZakupowy().obliczCalkowitaWartosc();

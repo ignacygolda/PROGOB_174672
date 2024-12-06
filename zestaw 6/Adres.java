@@ -1,4 +1,4 @@
-public class Adres {
+public class Adres implements Adres_interface {
     private String ulica;
     private int numerDomu;
     private int numerMieszkania;
