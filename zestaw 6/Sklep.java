@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Sklep {
+public class Sklep implements Sklep_interface{
     private List<Produkt> produkty;
     private String nazwaSklepu;
     private String dataPowstania;
@@ -50,7 +50,7 @@ public class Sklep {
         else throw new IllegalArgumentException("Niepoprawne dane");
     }
 
-    void dodajProdukt(Produkt p, int ilosc) {
+    public void dodajProdukt(Produkt p, int ilosc) {
         this.produkty.add(p);
         this.magazynSklepu.dodajProdukt(p,ilosc);
     }
@@ -64,12 +64,12 @@ public class Sklep {
         return out;
     }
 
-    void wyswietlOferty() {
+    public void wyswietlOferty() {
         for(int i=0;i<produkty.size();i++) {
             System.out.println(produkty.get(i).toString());
         }
     }
-    Produkt wyszukajProduktu(String n) {
+    public Produkt wyszukajProduktu(String n) {
         for(int i=0;i<produkty.size();i++) {
             if(produkty.get(i).getNazwa() == n) {
                 return produkty.get(i);
@@ -78,7 +78,7 @@ public class Sklep {
         return null;
     }
 
-    void zakupy(Magazyn m, Produkt p, int n, KoszykZakupowy k) {
+    public void zakupy(Magazyn m, Produkt p, int n, KoszykZakupowy k) {
         k.dodajProdukt(m,p,n);
     }
 }

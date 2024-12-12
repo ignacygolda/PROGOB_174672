@@ -1,35 +1,14 @@
 import java.util.List;
 import java.util.Objects;
 
-public class Klient implements Klient_interface {
-    private String imie;
-    private String nazwisko;
+public class Klient extends Osoba implements Klient_interface {
     private Adres adres;
     private List<Zamowienie> listaZamowien;
 
     public Klient(String imie, String nazwisko, Adres adres, List<Zamowienie> listaZamowien) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
+        super(imie,nazwisko);
         this.adres = adres;
         this.listaZamowien = listaZamowien;
-    }
-
-    public String getImie() {
-        return imie;
-    }
-
-    public void setImie(String imie) {
-        if(imie!=null) this.imie = imie;
-        else throw new IllegalArgumentException("Niepoprawne dane");
-    }
-
-    public String getNazwisko() {
-        return nazwisko;
-    }
-
-    public void setNazwisko(String nazwisko) {
-        if(nazwisko!=null) this.nazwisko = nazwisko;
-        else throw new IllegalArgumentException("Niepoprawne dane");
     }
 
     public Adres getAdres() {
@@ -68,13 +47,13 @@ public class Klient implements Klient_interface {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Klient klient = (Klient) obj;
-        if(this.imie.equals(klient.getImie()) && this.nazwisko.equals(klient.getNazwisko()) && this.adres.equals(klient.getAdres()) && this.listaZamowien.equals(klient.getListaZamowien())) return true;
+        if(this.getImie().equals(klient.getImie()) && this.getNazwisko().equals(klient.getNazwisko()) && this.adres.equals(klient.getAdres()) && this.listaZamowien.equals(klient.getListaZamowien())) return true;
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(imie, nazwisko, adres, listaZamowien);
+        return Objects.hash(getImie(), getNazwisko(), adres, listaZamowien);
     }
 
     public void wyswietlHistorieZamowien() {

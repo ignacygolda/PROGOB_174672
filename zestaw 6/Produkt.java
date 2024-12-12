@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Produkt {
+public class Produkt implements Produkt_interface {
     private String nazwa;
     private double cena;
 
@@ -46,10 +46,10 @@ public class Produkt {
         return false;
     }
 
-    void dodajDoMagazynu(Magazyn m, int ilosc) {
+    public void dodajDoMagazynu(Magazyn m, int ilosc) {
         m.dodajProdukt(this, ilosc);
     }
-    void usunZMagazynu(Magazyn m, int ilosc) {
+    public void usunZMagazynu(Magazyn m, int ilosc) {
         m.usunProdukt(this, ilosc);
     }
 }

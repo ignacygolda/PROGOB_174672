@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Magazyn {
+public class Magazyn implements Magazyn_interface {
     private HashMap<Produkt,Integer> produkty;
 
     public Magazyn() {
@@ -16,7 +16,7 @@ public class Magazyn {
         else throw new IllegalArgumentException("Niepoprawne dane");
     }
 
-    void dodajProdukt(Produkt p, int ilosc) {
+    public void dodajProdukt(Produkt p, int ilosc) {
         if(this.produkty.containsKey(p)) {
             int temp = this.produkty.get(p);
             temp+=ilosc;
@@ -27,7 +27,7 @@ public class Magazyn {
         }
     }
 
-    void usunProdukt(Produkt p, int ilosc) {
+    public void usunProdukt(Produkt p, int ilosc) {
         if(this.produkty.get(p)>ilosc) {
             int temp = this.produkty.get(p);
             temp-=ilosc;
@@ -50,7 +50,7 @@ public class Magazyn {
         return out;
     }
 
-    void wyswietlAsortyment() {
+    public void wyswietlAsortyment() {
         System.out.println("--------------------");
         for(Produkt p : this.produkty.keySet()) {
             System.out.println(p.toString());

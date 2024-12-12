@@ -36,7 +36,7 @@ public class Zamowienie {
         else throw new IllegalArgumentException("Niepoprawne dane");
     }
 
-    void ustawStatusZamownienia(String status) {
+    public void ustawStatusZamownienia(String status) {
         this.statusZamowienia = status;
     }
 
@@ -50,20 +50,20 @@ public class Zamowienie {
         return out;
     }
 
-    void wyswietlZamowienie() {
+    public void wyswietlZamowienie() {
         System.out.println("---------------------");
         System.out.println(this.statusZamowienia);
         this.koszykZakupowy.wyswietlZawartoscKoszyka();
         System.out.println("---------------------");
     }
 
-    void finalizujZamowienie() {
+    public void finalizujZamowienie() {
         if(this.platnosc.getStatusPlatnosci() == "Opłacone") {
             this.statusZamowienia = "Gotowe do wysyłki";
         }
     }
 
-    void zwrocProdukt(Magazyn m,Produkt p, int n) {
+    public void zwrocProdukt(Magazyn m,Produkt p, int n) {
         if(this.koszykZakupowy.getListaProduktow().get(p)>n) {
             p.dodajDoMagazynu(m,n);
             int temp = this.koszykZakupowy.getListaProduktow().get(p)-n;

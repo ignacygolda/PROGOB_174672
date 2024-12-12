@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Platnosc {
+public class Platnosc implements Platnosc_interface {
     private double kwota;
     private String statusPlatnosci;
 
@@ -41,7 +41,7 @@ public class Platnosc {
         return Objects.hash(kwota, statusPlatnosci);
     }
 
-    void zaplac() {
+    public void zaplac() {
         this.statusPlatnosci = "Opłacone";
     }
 }
