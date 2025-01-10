@@ -35,5 +35,26 @@ public class Main {
         for (Student s : students2) {
             System.out.println(s.toString());
         }
+
+        ArrayList<Order> orders = new ArrayList<>();
+        orders.add(new Order("aaa",234,23.35));
+        orders.add(new Order("aab",200,40.99));
+        orders.add(new Order("aba",120,40.99));
+        orders.add(new Order("abb",450,20.00));
+        Collections.sort(orders);
+        for (Order o : orders) {
+            System.out.println(o.toString());
+        }
+
+        ArrayList<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("a","aaaa","dfgh"));
+        employees.add(new Employee("b","aaa","dfg"));
+        employees.add(new Employee("c","a","cvb"));
+        employees.add(new Employee("d","aa","rdsf"));
+        Collections.sort(employees);
+        for (Employee e : employees) {
+            System.out.println(e.toString());
+        }
+
     }
 }
